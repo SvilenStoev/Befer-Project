@@ -1,30 +1,32 @@
-import * as api from './api.js';
+import { getUserData } from '../util.js';
 
-export const login = api.login;
-export const register = api.register;
-export const logout = api.logout;
+export const endpoints = {
+    publications: '/classes/Publication',
+    publicationDetails: (id) => `/classes/Publication/${id}?include=owner`,
+    publicationById: (id) => `/classes/Publication/${id}`,
+    comments: '/classes/Comment',
+    commentsByPublication: (publicationId) => `/classes/Comment?where=${createPointerQuery('publication', 'Publication', publicationId)}&include=author`,
+};
 
-export async function getPublications() {
-    return api.get('/classes/Publication');
+export function createPointerQuery(propName, className, objectId) {
+    return createQuery({[propName]: createPointer(className, objectId)});
 }
 
-function createPointer(className, objectId) {
+export function createQuery(query) {
+    return encodeURIComponent(JSON.stringify(query));
+}
+
+export function createPointer(className, objectId) {
     return {
-        "__type": "Pointer",
+        __type: 'Pointer',
         className,
         objectId
     }
 }
 
-export async function createPublication(publication, ownerId) {
-    publication.owner = createPointer('_User', ownerId);
+export function addOwner(record) {
+    const { id } = getUserData();
+    record.owner = createPointer('_User', id);
 
-    return api.post('/classes/Publication', publication);
-}
-
-export async function createComment(comment, publicationId) {
-    comment.author = createPointer('_User', ownerId);
-    comment.publication = createPointer('Publication', publicationId);
-
-    return api.post('/classes/Comment', comment);
+    return record;
 }

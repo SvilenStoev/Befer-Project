@@ -1,8 +1,10 @@
-import * as user from './api/user.js';
-import * as publication from './api/publication.js';
-import * as api from './api/comment.js';
+import { page } from './lib.js';
+import { homePage } from './views/home.js';
+import { loginPage } from './views/login.js';
+import decorateContext from './middlewares/render.js';
 
-window.api = api;
-window.publication = publication;
-window.user = user;
+page(decorateContext);
+page('/', homePage);
+page('/login', loginPage);
 
+page.start();

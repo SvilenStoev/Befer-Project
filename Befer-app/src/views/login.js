@@ -1,5 +1,6 @@
 import { login } from '../api/user.js';
 import { html, until } from '../lib.js';
+import { createSubmitHandler } from '../util.js';
 
 const loginTemplate = (onSubmit) => html`
 <form @submit=${onSubmit}>
@@ -17,16 +18,20 @@ const loginTemplate = (onSubmit) => html`
 </form>`;
 
 export function loginPage(ctx) {
-    ctx.render(loginTemplate(onSubmit));
+    ctx.render(loginTemplate(createSubmitHandler(onSubmit, 'username', 'password')));
 
-    async function onSubmit(event) {
-        event.preventDefault();
+    async function onSubmit({ username, password }) {
+        SlickLoader.enable();
 
-        const formData = new FormData(event.target);
+        if (username == '' || password == '') {
+            return alert('!!');
+        }
 
-        const username = formData.get('username');
-        const password = formData.get('password');
-
-        const result = await login(username, password);
+        await login(username, password);
+        
+        SlickLoader.disable();
+        ctx.updateSession();
+        ctx.updateUserNav();
+        ctx.page.redirect('/catalog');
     }
 }

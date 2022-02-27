@@ -1,5 +1,5 @@
-@import url('./site.css');
-@import url('./homePage.css');
-@import url('./create-publication.css');
-@import url('./details.css');
-@import url('./responsive.css');
+@import url('./styles/site.css');
+@import url('./styles/homePage.css');
+@import url('./styles/create-publication.css');
+@import url('./styles/details.css');
+@import url('./styles/responsive.css');

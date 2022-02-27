@@ -7,12 +7,7 @@ section {
 }
 
 section.main.container {
-    opacity: 0.8;
-    box-shadow: 2px 2px 1.5em 2px rgba(65,199,255,255);
-}
-
-section.container {
-    box-shadow: 2px 2px 1.5em 2px rgba(65,199,255,255);
+    opacity: 0.7;
 }
 
 section>h1 {

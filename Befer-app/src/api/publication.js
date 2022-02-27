@@ -16,7 +16,7 @@ export async function createPublication(publication) {
 }
 
 export async function updatePublication(id, publication) {
-    return api.put(endpoints.publications + id, publication);
+    return api.put(endpoints.publicationById(id), publication);
 }
 
 export async function deletePublication(id) {

@@ -25,8 +25,12 @@ export function createPointer(className, objectId) {
 }
 
 export function addOwner(record) {
-    const { id } = getUserData();
-    record.owner = createPointer('_User', id);
+    const userData = getUserData();
+    
+    if (userData) {
+        const { id } = userData;
+        record.owner = createPointer('_User', id);
+    }
 
     return record;
 }

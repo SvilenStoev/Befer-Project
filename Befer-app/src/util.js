@@ -15,8 +15,8 @@ export function createSubmitHandler(callback, ...fields) {
         event.preventDefault();
         const formData = new FormData(event.target);
 
-        const data = fields.reduce((a, c) => Object.assign(a, {[c]: formData.get(c)}), {});
+        const data = fields.reduce((a, c) => Object.assign(a, {[c]: formData.get(c).trim()}), {});
 
-        callback(data);
+        callback(data, event);
     }
 }

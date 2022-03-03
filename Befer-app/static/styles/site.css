@@ -147,6 +147,11 @@ form button:hover {
     border-color: rgba(255, 0, 0, 0.315);
 }
 
+input.error, textarea.error {
+    background-color: rgba(236, 91, 152, 0.568);
+    border: 2px solid rgba(218, 6, 6, 0.315);
+}
+
 .loading {
     border-color: rgba(8, 144, 255, 0.973);
     background-color: rgba(1, 73, 133, 0.973);
